@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 //import * as actions from "../actions";
 import axios from "axios";
 
@@ -75,6 +76,8 @@ class Dashboard extends Component {
     }
   }
 
+  addStudentClick() {}
+
   render() {
     if (!this.state.promiseResolved) {
       return (
@@ -86,10 +89,15 @@ class Dashboard extends Component {
       console.log("HERE2");
       return (
         <div>
-          <div style={{ textAlign: "center",  }}>
-            <h4>Welcome, {this.props.auth.name}! Here is your students dashboard.</h4>
+          <div style={{ textAlign: "center" }}>
+            <h4>
+              Welcome, {this.props.auth.name}! Here is your students dashboard.
+            </h4>
           </div>
           <Table rows={this.state.rows} />
+          <div style={{ textAlign: "right" }}>
+          <Link to="/student-registration" className="btn red lighten-3">Add Student</Link>
+          </div>
         </div>
       );
     }

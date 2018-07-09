@@ -6,6 +6,7 @@ import * as actions from "../actions";
 import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
+import StudentRegistration from './StudentRegistration';
 
 class App extends Component {
 
@@ -21,6 +22,7 @@ class App extends Component {
                         <Header />
                         <Route exact path="/" component={Landing} />
                         <Route exact path="/dashboard" component={Dashboard} />
+                        <Route exact path="/student-registration" component={StudentRegistration} />
                     </div>
                 </BrowserRouter>
             </div>

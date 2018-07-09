@@ -26,5 +26,6 @@ Collections:
         uniqueID
         startTime
         endTime
+        parents []
         students []
         fee
