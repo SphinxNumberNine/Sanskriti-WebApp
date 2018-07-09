@@ -1,0 +1,30 @@
+DATABASE
+
+Collections:
+
+    Users:
+        uniqueID
+        name
+        email
+        phoneNumber
+        googleID
+        students []
+
+
+    Students:
+        uniqueID
+        name
+        email
+        phoneNumber
+        parentUser
+        classes []
+        totalFees
+        paid
+
+
+    Classes:
+        uniqueID
+        startTime
+        endTime
+        students []
+        fee
