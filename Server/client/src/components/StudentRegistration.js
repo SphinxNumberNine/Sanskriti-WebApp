@@ -4,9 +4,13 @@ import axios from "axios";
 import Redirect from "react-router-dom/Redirect";
 
 class StudentRegistration extends Component {
+
+  componentDidMount() {
+    this.setState({ auth: this.props.auth });
+  }
+
   submit(e) {
       console.log("Submitted");
-      return <Redirect push to="/dashboard" />
   }
 
   getClasses() {
@@ -44,6 +48,7 @@ class StudentRegistration extends Component {
   }
 
   render() {
+    console.log(this.state);
     return <div style={{ textAlign: "left", anchor: "bottom" }}>{this.renderForm()}</div>;
   }
 }
