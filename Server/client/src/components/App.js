@@ -7,6 +7,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import StudentRegistration from './StudentRegistration';
+import Classes from './admin/Classes'
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
                         <Route exact path="/" component={Landing} />
                         <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path="/student-registration" component={StudentRegistration} />
+                        <Route exact path="/admin/classes" component={Classes} />
                     </div>
                 </BrowserRouter>
             </div>

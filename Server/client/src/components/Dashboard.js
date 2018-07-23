@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-//import * as actions from "../actions";
+import Payments from './Payments';
 import axios from "axios";
 
 class Dashboard extends Component {
@@ -86,7 +86,6 @@ class Dashboard extends Component {
         </div>
       );
     } else {
-      console.log("HERE2");
       return (
         <div>
           <div style={{ textAlign: "center" }}>
@@ -96,7 +95,10 @@ class Dashboard extends Component {
           </div>
           <Table rows={this.state.rows} />
           <div style={{ textAlign: "right" }}>
-          <Link to="/student-registration" className="btn red lighten-3">Add Student</Link>
+            <Link to="/student-registration" className="btn red lighten-3">Add Student</Link>
+          </div>
+          <div style={{ textAlign: "right", padding: "10px" }}>
+            <Payments />
           </div>
         </div>
       );

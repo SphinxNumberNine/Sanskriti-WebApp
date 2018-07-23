@@ -22,13 +22,13 @@ module.exports = app => {
   });
 
   app.post("/register/class", async (req, res) => {
-    const class = await new Class({
+    const danceClass = await new Class({
       name: req.body.name,
       dayOfWeek: req.body.dayOfWeek,
-      time = req.body.time,
-      students = req.body.students,
-      users = req.body.users,
-      fee = req.body.fee
+      time: req.body.time,
+      students: req.body.students,
+      users: req.body.users,
+      fee: req.body.fee
     }).save();
 
     res.status(200).json({

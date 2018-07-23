@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import Redirect from "react-router-dom/Redirect";
 
 class StudentRegistration extends Component {
 
@@ -9,7 +8,8 @@ class StudentRegistration extends Component {
     this.setState({ auth: this.props.auth });
   }
 
-  submit(e) {
+  submit(e) 
+  { 
       console.log("Submitted");
   }
 
@@ -22,13 +22,13 @@ class StudentRegistration extends Component {
     return (
       <form>
         <h6>Name: </h6>
-        <input type="text" name="name" />
+        <input type="text" name="name" id="name_id"/>
         <br />
         <h6>Email: </h6>
-        <input type="text" name="email" />
+        <input type="text" name="email" id="email_id"/>
         <br />
         <h6>Phone: </h6>
-        <input type="text" name="phone" />
+        <input type="text" name="phone" id="phone_id"/>
         <br />
         <h6>Classes: </h6>
         <ul>
