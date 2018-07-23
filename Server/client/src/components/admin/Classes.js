@@ -31,16 +31,18 @@ class Classes extends Component {
   render() {
     switch (this.props.auth) {
       case null:
-        return(<div>YEET</div>)
+        return(<div>ERROR</div>)
       case false:
-        return(this.renderPermissionsError());
+        return(<div>ERROR</div>);
       default:
-        return(this.renderClasses());
-    }
-
-    console.log(this.props);
-
-    
+        console.log(this.props.auth.admin);
+        switch(this.props.auth.admin) {
+          case true:
+            return(this.renderClasses());
+          default:
+            return(this.renderPermissionsError());
+        }
+    }   
   }
 }
 
