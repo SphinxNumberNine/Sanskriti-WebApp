@@ -45,7 +45,7 @@ module.exports = app => {
     });
   });
 
-  app.get("/", async (req, res) => {
+  app.get("/api/classes", async (req, res) => {
     const classes = await Class.find({});
 
     res.status(200).json({
