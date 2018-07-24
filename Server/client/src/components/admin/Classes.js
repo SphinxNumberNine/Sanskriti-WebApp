@@ -12,14 +12,19 @@ class Classes extends Component {
     console.log(nextProps);
   }
 
-  getClasses() {
+  componentDidMount() {
+    this.getClasses();
+  }
+
+  async getClasses() {
     let rows = [];
-    axios.get("/api/classes").then(res => {
+    await axios.get("/api/classes").then(res => {
       var classes = res.data.classes;
-      console.log(classes)
+      console.log(classes);
       if (classes) {
         for (var i = 0; i < classes.length; i++) {
           var danceClass = classes[i];
+          console.log(danceClass);
           let rowID = `row${i}`;
           let cell = [];
           let cellKey = `cell${i}`;
@@ -37,12 +42,22 @@ class Classes extends Component {
             }
           }
           cell.push(<td key={cellKey + "4"}>{students}</td>);
+          console.log(cell);
           rows.push(
             <tr key={i} id={rowID}>
               {cell}
             </tr>
           );
         }
+        console.log(rows);
+
+        this.setState({
+          rows: rows,
+          promiseResolved: true
+        });
+
+        console.log(this.state);
+
         return rows;
       }
     });
@@ -51,17 +66,25 @@ class Classes extends Component {
   }
 
   renderClasses() {
-    return (
-      <div>
+    if (!this.state.promiseResolved) {
+      return (
         <div style={{ textAlign: "center" }}>
-          <h4>
-            Welcome, {this.props.auth.name}. Here is the Sanskriti classes
-            dashboard.
-          </h4>
+          Please login as admin to see classes dashboard
         </div>
-        <Table rows={this.getClasses()} />
-      </div>
-    );
+      )
+    } else {
+      return (
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <h4>
+              Welcome, {this.props.auth.name}. Here is the Sanskriti classes
+              dashboard.
+            </h4>
+          </div>
+          <Table rows={this.state.rows} />
+        </div>
+      );
+    }
   }
 
   renderPermissionsError() {
