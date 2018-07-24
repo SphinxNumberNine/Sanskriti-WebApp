@@ -8,10 +8,6 @@ class Classes extends Component {
     this.state = {};
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-  }
-
   componentDidMount() {
     this.getClasses();
   }
@@ -20,11 +16,9 @@ class Classes extends Component {
     let rows = [];
     await axios.get("/api/classes").then(res => {
       var classes = res.data.classes;
-      console.log(classes);
       if (classes) {
         for (var i = 0; i < classes.length; i++) {
           var danceClass = classes[i];
-          console.log(danceClass);
           let rowID = `row${i}`;
           let cell = [];
           let cellKey = `cell${i}`;
@@ -42,21 +36,17 @@ class Classes extends Component {
             }
           }
           cell.push(<td key={cellKey + "4"}>{students}</td>);
-          console.log(cell);
           rows.push(
             <tr key={i} id={rowID}>
               {cell}
             </tr>
           );
         }
-        console.log(rows);
 
         this.setState({
           rows: rows,
           promiseResolved: true
         });
-
-        console.log(this.state);
 
         return rows;
       }
@@ -102,7 +92,6 @@ class Classes extends Component {
       case false:
         return <div>ERROR</div>;
       default:
-        console.log(this.props.auth.admin);
         switch (this.props.auth.admin) {
           case true:
             return this.renderClasses();
@@ -133,7 +122,6 @@ function Table(props) {
               </tr>
             </thead>
             <tbody>{rows}</tbody>
-            {console.log("I am here")}
           </table>
         </div>
       </div>
