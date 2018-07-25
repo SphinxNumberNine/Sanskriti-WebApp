@@ -8,7 +8,8 @@ const studentSchema = new Schema({
   parentUser: String,
   totalFees: String,
   paid: Boolean,
-  classes: Array
+  classes: Array,
+  classesIds: Array
 });
 
 mongoose.model("students", studentSchema);
