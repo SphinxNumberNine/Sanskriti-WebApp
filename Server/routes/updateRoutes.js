@@ -2,18 +2,12 @@ const mongoose = require("mongoose");
 
 const Student = mongoose.model("students");
 const Class = mongoose.model("classes");
-const User = mongoose.model("user");
+const User = mongoose.model("users");
 
 module.exports = app => {
   app.post("/update/student", async (req, res) => {
     const id = req.body.id;
-    Student.findById(id).then((err, student) => {
-      if (err) {
-        return res.status(501).json({
-          message: "error"
-        });
-      }
-
+    Student.findById(id).then((student) => {
       student.name = req.body.name;
       student.email = req.body.email;
       student.phoneNumber = req.body.phoneNumber;
@@ -33,13 +27,7 @@ module.exports = app => {
 
   app.post("/update/class", async (req, res) => {
     const id = req.body.id;
-    Class.findById(id).then((err, danceClass) => {
-      if (err) {
-        return res.status(501).json({
-          message: "error"
-        });
-      }
-
+    Class.findById(id).then((danceClass) => {
       danceClass.name = req.body.name;
       danceClass.dayOfWeek = req.body.dayOfWeek;
       danceClass.time = req.body.time;
@@ -57,22 +45,16 @@ module.exports = app => {
 
   app.post("/update/user", async (req, res) => {
     const id = req.body.id;
-    User.findById(id).then((err, user) => {
-      if (err) {
-        return res.status(501).json({
-          message: "error"
-        });
-      }
-
+    User.findById(id).then((user) => {
       user.name = req.body.name;
       user.email = req.body.email;
       user.students = req.body.students;
-      user.save()
+      user.save();
 
       res.status(200).json({
-          user: user,
-          message: "user updated"
-      })
+        user: user,
+        message: "user updated"
+      });
     });
   });
 };

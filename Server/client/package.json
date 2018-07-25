@@ -11,6 +11,9 @@
     },
     "/register/*": {
       "target": "http://localhost:5000"
+    },
+    "/update/*": {
+      "target": "http://localhost:5000"
     }
   },
   "dependencies": {

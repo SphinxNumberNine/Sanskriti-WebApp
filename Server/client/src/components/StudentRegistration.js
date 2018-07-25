@@ -60,16 +60,55 @@ class StudentRegistration extends Component {
 
     //TODO: Check if fields are valid
 
-    axios.post("/register/student", {
-      name: name,
-      email: email,
-      phoneNumber: phone,
-      parentUser: this.state.parentUser,
-      classes: userSignedUpClasses,
-      classesIds: userSignedUpIds,
-      totalFees: totalFeeString,
-      paid: false,
-    });
+    axios
+      .post("/register/student", {
+        name: name,
+        email: email,
+        phoneNumber: phone,
+        parentUser: this.state.parentUser,
+        classes: userSignedUpClasses,
+        classesIds: userSignedUpIds,
+        totalFees: totalFeeString,
+        paid: false
+      })
+      .then(res => {
+        // Update classes, adding new student and (potentially) new user
+
+        for (var x = 0; x < this.state.classes.length; x++) {
+          if (userSignedUpIds.includes(this.state.classes[x]._id)) {
+            const danceClass = this.state.classes[x];
+            const users = danceClass.users;
+            const students = danceClass.students;
+            if (!users.includes(this.state.parentUser)) {
+              users = users.push(this.state.parentUser);
+            }
+            students = students.push(res.student._id);
+
+            axios.post("/update/class", {
+              id: danceClass._id,
+              name: danceClass.name,
+              dayOfWeek: danceClass.dayOfWeek,
+              time: danceClass.time,
+              students: students,
+              users: users,
+              fee: danceClass.fee
+            });
+          }
+        }
+
+        //Update user, adding new student
+
+        const currentUserStudents = this.state.auth.students;
+        currentUserStudents = currentUserStudents.push(res.student._id);
+        axios.post("/update/user", {
+          id: this.state.parentUser,
+          name: this.state.auth.name,
+          email: this.state.auth.email,
+          students: currentUserStudents,
+          admin: this.state.auth.admin,
+          googleId: this.state.auth.googleId
+        });
+      });
   }
 
   setClassesInState() {
