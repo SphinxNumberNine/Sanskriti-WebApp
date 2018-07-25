@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Checkbox from "./Checkbox";
 import axios from "axios";
 
 class StudentRegistration extends Component {
@@ -12,29 +11,6 @@ class StudentRegistration extends Component {
   componentWillMount() {
     this.selectedCheckboxes = new Set();
   }
-
-  toggleCheckbox = label => {
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
-    } else {
-      this.selectedCheckboxes.add(label);
-    }
-  };
-
-  createCheckbox = label => (
-    <Checkbox
-      label={label}
-      handleCheckboxChange={this.toggleCheckbox}
-      key={label}
-    />
-  );
-
-  createCheckboxes = classes => {
-    console.log(classes);
-    const checkboxes = classes.map(this.createCheckbox);
-    console.log(checkboxes);
-    return checkboxes;
-  };
 
   handleInputChange() {}
 
