@@ -1,18 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Checkbox from './Checkbox';
+import Checkbox from "./Checkbox";
 import axios from "axios";
 
 class StudentRegistration extends Component {
-
   constructor() {
-    super()
+    super();
     this.state = {};
   }
 
-  handleInputChange() {
-
+  componentWillMount() {
+    this.selectedCheckboxes = new Set();
   }
+
+  toggleCheckbox = label => {
+    if (this.selectedCheckboxes.has(label)) {
+      this.selectedCheckboxes.delete(label);
+    } else {
+      this.selectedCheckboxes.add(label);
+    }
+  };
+
+  createCheckbox = label => (
+    <Checkbox
+      label={label}
+      handleCheckboxChange={this.toggleCheckbox}
+      key={label}
+    />
+  );
+
+  createCheckboxes = classes => {
+    console.log(classes);
+    const checkboxes = classes.map(this.createCheckbox);
+    console.log(checkboxes);
+    return checkboxes;
+  };
+
+  handleInputChange() {}
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -54,20 +78,24 @@ class StudentRegistration extends Component {
         var danceClass = classes[x];
         var danceClassText =
           danceClass.name + ": " + danceClass.dayOfWeek + " " + danceClass.time;
+        var danceClassId = danceClassText + "_id";
         var boxKey = `box${x}`;
         classCheckBoxes.push(
           <li key={boxKey}>
-            <label>
-              {danceClassText}
-              <input type="checkbox" name="class" value={danceClass.name} onChange={this.handleInputChange} checked={false}/>
-            </label>
+            <input
+              type="checkbox"
+              name="class"
+              value={danceClass.name}
+              onChange={this.handleInputChange}
+              id={danceClassId}
+            />
+            <label htmlFor={danceClassId}>{danceClassText}</label>
           </li>
         );
       }
-      console.log(classCheckBoxes);
       return classCheckBoxes;
     }
-    return [];
+    return null;
   }
 
   renderForm() {
