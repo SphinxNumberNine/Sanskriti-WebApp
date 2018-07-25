@@ -18,6 +18,7 @@ module.exports = app => {
     }).save();
 
     res.status(200).json({
+      student: student,
       message: "student saved"
     });
   });
