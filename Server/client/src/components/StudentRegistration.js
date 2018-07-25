@@ -29,6 +29,47 @@ class StudentRegistration extends Component {
     console.log(name);
     console.log(email);
     console.log(phone);
+
+    const classCheckboxes = document.getElementsByName("class");
+    let userSignedUpClasses = [];
+    let userSignedUpIds = [];
+    for (var x = 0; x < classCheckboxes.length; x++) {
+      const checkbox = classCheckboxes[x];
+      if (checkbox.checked) {
+        const label = document.getElementById(checkbox.id + "_label");
+        const text = label.innerText;
+        console.log(text);
+        userSignedUpIds.push(checkbox.id);
+        userSignedUpClasses.push(text);
+      }
+    }
+
+    var totalFees = 0;
+    var totalFeeString = "0";
+
+    for (var x = 0; x < this.state.classes.length; x++) {
+      const danceClass = this.state.classes[x];
+      if (userSignedUpIds.includes(danceClass._id)) {
+        var classFee = danceClass.fee;
+        classFee = classFee.replace(/\$|,/g, "");
+        var feeInt = parseInt(classFee);
+        totalFees += feeInt;
+        totalFeeString = "$" + totalFees;
+      }
+    }
+
+    //TODO: Check if fields are valid
+
+    axios.post("/register/student", {
+      name: name,
+      email: email,
+      phoneNumber: phone,
+      parentUser: this.state.parentUser,
+      classes: userSignedUpClasses,
+      classesIds: userSignedUpIds,
+      totalFees: totalFeeString,
+      paid: false,
+    });
   }
 
   setClassesInState() {
@@ -54,7 +95,7 @@ class StudentRegistration extends Component {
         var danceClass = classes[x];
         var danceClassText =
           danceClass.name + ": " + danceClass.dayOfWeek + " " + danceClass.time;
-        var danceClassId = danceClassText + "_id";
+        var danceClassId = danceClass._id;
         var boxKey = `box${x}`;
         classCheckBoxes.push(
           <li key={boxKey}>
@@ -65,7 +106,9 @@ class StudentRegistration extends Component {
               onChange={this.handleInputChange}
               id={danceClassId}
             />
-            <label htmlFor={danceClassId}>{danceClassText}</label>
+            <label htmlFor={danceClassId} id={danceClassId + "_label"}>
+              {danceClassText}
+            </label>
           </li>
         );
       }

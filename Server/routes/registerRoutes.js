@@ -12,6 +12,7 @@ module.exports = app => {
       phoneNumber: req.body.phoneNumber,
       parentUser: req.body.parentUser,
       classes: req.body.classes,
+      classesIds: req.body.classesIds,
       totalFees: req.body.totalFees,
       paid: req.body.paid
     }).save();
