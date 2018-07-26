@@ -84,6 +84,8 @@ class StudentRegistration extends Component {
             }
             students = students.push(res.data.student._id);
 
+            console.log(students);
+
             axios.post("/update/class", {
               id: danceClass._id,
               name: danceClass.name,

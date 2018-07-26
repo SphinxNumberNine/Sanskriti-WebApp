@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import Payments from "./Payments";
 import axios from "axios";
 
@@ -77,9 +76,9 @@ class Dashboard extends Component {
           </div>
           <Table rows={this.state.rows} />
           <div style={{ textAlign: "right" }}>
-            <Link to="/student-registration" className="btn red lighten-3">
+            <a href="/student-registration" className="btn red lighten-3">
               Add Student
-            </Link>
+            </a>
           </div>
           <div style={{ textAlign: "right", padding: "10px" }}>
             <Payments />
