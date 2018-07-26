@@ -119,6 +119,8 @@ class StudentRegistration extends Component {
           admin: this.state.auth.admin,
           googleId: this.state.auth.googleId
         });
+
+        this.props.history.push("/student-registration/success");
       });
   }
 
