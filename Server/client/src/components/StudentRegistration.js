@@ -79,12 +79,12 @@ class StudentRegistration extends Component {
             const danceClass = this.state.classes[y];
             var users = danceClass.users;
             var students = danceClass.students;
-            if (!users.includes(this.state.parentUser)) {
-              users = users.push(this.state.parentUser);
-            }
-            students = students.push(res.data.student._id);
 
-            console.log(students);
+            if (!users.includes(this.state.parentUser)) {
+              users.push(this.state.parentUser);
+            }
+
+            students.push(res.data.student._id);
 
             axios.post("/update/class", {
               id: danceClass._id,
@@ -101,7 +101,8 @@ class StudentRegistration extends Component {
         //Update user, adding new student
 
         var currentUserStudents = this.state.auth.students;
-        currentUserStudents = currentUserStudents.push(res.data.student._id);
+        currentUserStudents.push(res.data.student._id);
+        
         axios.post("/update/user", {
           id: this.state.parentUser,
           name: this.state.auth.name,
@@ -122,7 +123,8 @@ class StudentRegistration extends Component {
           auth: this.state.auth,
           parentUser: this.state.parentUser,
           classes: classes
-        });
+        })
+        console.log(this.state.classes);
       }
     });
   }

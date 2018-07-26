@@ -41,7 +41,6 @@ module.exports = app => {
   app.post("/api/students", async (req, res) => {
     const parentId = req.body.parentId;
     const students = await Student.find({ parentUser: parentId });
-    //console.log(students);
     res.status(200).json({
       students: students
     });
