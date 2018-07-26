@@ -47,12 +47,12 @@ class StudentRegistration extends Component {
     var totalFees = 0;
     var totalFeeString = "0";
 
-    for (var x = 0; x < this.state.classes.length; x++) {
-      const danceClass = this.state.classes[x];
+    for (var i = 0; i < this.state.classes.length; i++) {
+      const danceClass = this.state.classes[i];
       if (userSignedUpIds.includes(danceClass._id)) {
         var classFee = danceClass.fee;
         classFee = classFee.replace(/\$|,/g, "");
-        var feeInt = parseInt(classFee);
+        var feeInt = parseInt(classFee, 10);
         totalFees += feeInt;
         totalFeeString = "$" + totalFees;
       }
@@ -74,15 +74,15 @@ class StudentRegistration extends Component {
       .then(res => {
         // Update classes, adding new student and (potentially) new user
 
-        for (var x = 0; x < this.state.classes.length; x++) {
-          if (userSignedUpIds.includes(this.state.classes[x]._id)) {
-            const danceClass = this.state.classes[x];
-            const users = danceClass.users;
-            const students = danceClass.students;
+        for (var y = 0; y < this.state.classes.length; y++) {
+          if (userSignedUpIds.includes(this.state.classes[y]._id)) {
+            const danceClass = this.state.classes[y];
+            var users = danceClass.users;
+            var students = danceClass.students;
             if (!users.includes(this.state.parentUser)) {
               users = users.push(this.state.parentUser);
             }
-            students = students.push(res.student._id);
+            students = students.push(res.data.student._id);
 
             axios.post("/update/class", {
               id: danceClass._id,
@@ -98,8 +98,8 @@ class StudentRegistration extends Component {
 
         //Update user, adding new student
 
-        const currentUserStudents = this.state.auth.students;
-        currentUserStudents = currentUserStudents.push(res.student._id);
+        var currentUserStudents = this.state.auth.students;
+        currentUserStudents = currentUserStudents.push(res.data.student._id);
         axios.post("/update/user", {
           id: this.state.parentUser,
           name: this.state.auth.name,

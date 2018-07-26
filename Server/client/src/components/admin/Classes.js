@@ -12,6 +12,10 @@ class Classes extends Component {
     this.getClasses();
   }
 
+  componentWillMount() {
+    this.setState({ auth: this.props.auth });
+  }
+
   async getClasses() {
     let rows = [];
     await axios.get("/api/classes").then(res => {
@@ -44,6 +48,7 @@ class Classes extends Component {
         }
 
         this.setState({
+          auth: this.props.auth,
           rows: rows,
           promiseResolved: true
         });
@@ -61,7 +66,7 @@ class Classes extends Component {
         <div style={{ textAlign: "center" }}>
           Please login as admin to see classes dashboard
         </div>
-      )
+      );
     } else {
       return (
         <div>

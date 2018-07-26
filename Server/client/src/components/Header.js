@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 class Header extends Component {
+  componentWillMount() {
+    this.setState({ auth: this.props.auth });
+  }
+
   renderContent() {
     switch (this.props.auth) {
       case null:
@@ -33,15 +36,16 @@ class Header extends Component {
   }
 
   render() {
+    var href = "/";
+    if (this.props.auth) {
+      href = "/dashboard";
+    }
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link
-            to={this.props.auth ? "/dashboard" : "/"}
-            className="left brand-logo"
-          >
+          <a href={href} className="left brand-logo">
             Sanskriti School of Dance
-          </Link>
+          </a>
           <ul className="right">{this.renderContent()}</ul>
         </div>
       </nav>
