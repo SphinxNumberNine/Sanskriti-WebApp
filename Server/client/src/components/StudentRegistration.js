@@ -12,7 +12,7 @@ class StudentRegistration extends Component {
     this.selectedCheckboxes = new Set();
   }
 
-  handleInputChange() {}
+  handleInputChange() { }
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -60,6 +60,14 @@ class StudentRegistration extends Component {
 
     //TODO: Check if fields are valid
 
+    if((!this.validateEmail(email))) {
+      return;
+    }
+    
+    if((!this.validateName(name))) {
+      return;
+    }
+
     axios
       .post("/register/student", {
         name: name,
@@ -102,7 +110,7 @@ class StudentRegistration extends Component {
 
         var currentUserStudents = this.state.auth.students;
         currentUserStudents.push(res.data.student._id);
-        
+
         axios.post("/update/user", {
           id: this.state.parentUser,
           name: this.state.auth.name,
@@ -146,7 +154,7 @@ class StudentRegistration extends Component {
               type="checkbox"
               name="class"
               value={danceClass.name}
-              onChange={this.handleInputChange}
+              onChange={this.handleInputChange.bind(this)}
               id={danceClassId}
             />
             <label htmlFor={danceClassId} id={danceClassId + "_label"}>
@@ -171,7 +179,7 @@ class StudentRegistration extends Component {
         <input type="text" name="email" id="email_id" />
         <br />
         <h6>Phone: </h6>
-        <input type="text" name="phone" id="phone_id" />
+        <input type="number" name="phone" id="phone_id" />
         <br />
         <h6>Classes: </h6>
         <ul>{this.renderClasses()}</ul>
@@ -194,6 +202,19 @@ class StudentRegistration extends Component {
         {this.renderForm()}
       </div>
     );
+  }
+
+  validateEmail(email) {
+    const regex = /\S+@\S+\.\S+/;
+    return regex.test(email);
+  }
+
+  validateName(name) {
+    if(name.length > 70 || name.length < 7) {
+      return false;
+    }
+
+    return true;
   }
 }
 
