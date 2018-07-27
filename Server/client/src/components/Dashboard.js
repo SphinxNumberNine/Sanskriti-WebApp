@@ -10,6 +10,7 @@ class Dashboard extends Component {
 
   async getStudents(parentUser) {
     let rows = [];
+    let totalFees = 0;
     const res = await axios.post("/api/students", { parentId: parentUser });
     this.students = res.data.students;
     if (this.students) {
@@ -31,6 +32,9 @@ class Dashboard extends Component {
           }
         }
         cell.push(<td key={cellkey + "4"}>{classes}</td>);
+        cell.push(<td key={cellkey + "5"}>{student.totalFees}</td>);
+        var feesAsNumber = parseInt(student.totalFees.replace("$", ""), 10);
+        totalFees += feesAsNumber;
         rows.push(
           <tr key={i} id={rowID}>
             {cell}
@@ -42,7 +46,8 @@ class Dashboard extends Component {
     this.setState({
       auth: this.props.auth,
       rows: rows,
-      promiseResolved: true
+      promiseResolved: true,
+      totalFees: totalFees
     });
   }
 
@@ -81,7 +86,7 @@ class Dashboard extends Component {
             </a>
           </div>
           <div style={{ textAlign: "right", padding: "10px" }}>
-            <Payments />
+            <Payments totalFees={this.state.totalFees * 100}/>
           </div>
         </div>
       );
@@ -99,13 +104,14 @@ function Table(props) {
     <div className="container">
       <div className="row">
         <div className="col s12 board">
-          <table id="simple-board">
+          <table id="simple-board" border="1" class="highlight responsive-table">
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Classes</th>
+                <th>Monthly Fees</th>
               </tr>
             </thead>
             <tbody>{rows}</tbody>

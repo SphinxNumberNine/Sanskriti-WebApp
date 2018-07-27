@@ -7,7 +7,7 @@ class Payments extends Component {
   render() {
     return (
       <StripeCheckout
-        amount={8000}
+        amount={this.props.totalFees || 10000}
         name="Sanskriti School of Dance"
         description="Pay fees for this month."
         token={token => this.props.handleToken(token)}
