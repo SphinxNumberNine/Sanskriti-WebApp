@@ -104,7 +104,7 @@ function Table(props) {
     <div className="container">
       <div className="row">
         <div className="col s12 board">
-          <table id="simple-board" border="1" class="highlight responsive-table">
+          <table id="simple-board" border="1" className="highlight responsive-table bordered">
             <thead>
               <tr>
                 <th>Name</th>
