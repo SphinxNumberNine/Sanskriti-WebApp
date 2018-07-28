@@ -17,7 +17,7 @@ class Dashboard extends Component {
       //let rows = [];
       for (var i = 0; i < this.students.length; i++) {
         var student = this.students[i];
-        let rowID = `row${i}`;
+        let rowID = student._id;
         let cell = [];
         let cellkey = `cell${i}`;
         cell.push(<td key={cellkey + "1"}>{student.name}</td>);
@@ -104,7 +104,7 @@ function Table(props) {
     <div className="container">
       <div className="row">
         <div className="col s12 board">
-          <table id="simple-board" border="1" class="highlight responsive-table">
+          <table id="simple-board" border="1" className="highlight responsive-table bordered">
             <thead>
               <tr>
                 <th>Name</th>
