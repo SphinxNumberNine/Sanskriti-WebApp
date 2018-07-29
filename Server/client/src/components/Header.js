@@ -23,12 +23,18 @@ class Header extends Component {
               <a href="/admin/classes">Classes</a>
             </li>,
             <li key="2">
+              <a href="/dashboard">Dashboard</a>
+            </li>,
+            <li key="3">
               <a href="/api/logout">Logout</a>
             </li>
           ];
         }
         return [
           <li key="2">
+            <a href="/dashboard">Dashboard</a>
+          </li>,
+          <li key="3">
             <a href="/api/logout">Logout</a>
           </li>
         ];

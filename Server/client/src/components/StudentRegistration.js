@@ -191,6 +191,7 @@ class StudentRegistration extends Component {
             name="submit"
             onClick={this.submit}
             value="Submit"
+            className="btn red lighten-3"
           />
           <br />
         </div>
