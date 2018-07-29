@@ -1,10 +1,8 @@
-import { FETCH_USER, GET_STUDENTS} from "../actions/types";
+import { FETCH_USER } from "../actions/types";
 
 export default function(state = null, action) {
   switch (action.type) {
     case FETCH_USER:
-      return action.payload || false;
-    case GET_STUDENTS:
       return action.payload || false;
     default:
       return state;
