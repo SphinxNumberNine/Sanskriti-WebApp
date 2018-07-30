@@ -12,7 +12,7 @@ class StudentRegistration extends Component {
     this.selectedCheckboxes = new Set();
   }
 
-  handleInputChange() { }
+  handleInputChange() {}
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -60,11 +60,11 @@ class StudentRegistration extends Component {
 
     //TODO: Check if fields are valid
 
-    if((!this.validateEmail(email))) {
+    if (!this.validateEmail(email)) {
       return;
     }
-    
-    if((!this.validateName(name))) {
+
+    if (!this.validateName(name)) {
       return;
     }
 
@@ -133,7 +133,7 @@ class StudentRegistration extends Component {
           auth: this.state.auth,
           parentUser: this.state.parentUser,
           classes: classes
-        })
+        });
         console.log(this.state.classes);
       }
     });
@@ -213,7 +213,7 @@ class StudentRegistration extends Component {
   }
 
   validateName(name) {
-    if(name.length > 70 || name.length < 7) {
+    if (name.length > 70 || name.length < 7) {
       return false;
     }
 
