@@ -9,6 +9,9 @@
     "/api/*": {
       "target": "http://localhost:5000"
     },
+    "/api/fetch/*": {
+      "target": "http://localhost:5000"
+    },
     "/register/*": {
       "target": "http://localhost:5000"
     },

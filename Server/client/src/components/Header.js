@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from '../actions';
 
 class Header extends Component {
   componentWillMount() {
@@ -18,17 +19,24 @@ class Header extends Component {
         );
       default:
         if (this.props.auth.admin) {
+          this.props.getAllClasses();
           return [
             <li key="1">
               <a href="/admin/classes">Classes</a>
             </li>,
             <li key="2">
+              <a href="/dashboard">Dashboard</a>
+            </li>,
+            <li key="3">
               <a href="/api/logout">Logout</a>
             </li>
           ];
         }
         return [
           <li key="2">
+            <a href="/dashboard">Dashboard</a>
+          </li>,
+          <li key="3">
             <a href="/api/logout">Logout</a>
           </li>
         ];
@@ -57,4 +65,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

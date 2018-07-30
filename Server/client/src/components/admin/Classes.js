@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from '../../actions'
 import axios from "axios";
 
 class Classes extends Component {
@@ -16,6 +17,11 @@ class Classes extends Component {
     this.setState({ auth: this.props.auth });
   }
 
+  onRowClick(id) {
+    this.props.fetchClass(id);
+    this.props.history.push("/admin/class-edit");
+  }
+
   async getClasses() {
     let rows = [];
     await axios.get("/api/classes").then(res => {
@@ -23,7 +29,7 @@ class Classes extends Component {
       if (classes) {
         for (var i = 0; i < classes.length; i++) {
           var danceClass = classes[i];
-          let rowID = `row${i}`;
+          let rowID = danceClass._id;
           let cell = [];
           let cellKey = `cell${i}`;
           cell.push(<td key={cellKey + "1"}>{danceClass.name}</td>);
@@ -41,7 +47,7 @@ class Classes extends Component {
           }
           cell.push(<td key={cellKey + "4"}>{students}</td>);
           rows.push(
-            <tr key={i} id={rowID}>
+            <tr key={i} id={rowID} onClick={() => this.onRowClick(rowID)}>
               {cell}
             </tr>
           );
@@ -75,6 +81,7 @@ class Classes extends Component {
               Welcome, {this.props.auth.name}. Here is the Sanskriti classes
               dashboard.
             </h4>
+            <h6>Click on a class to edit it.</h6>
           </div>
           <Table rows={this.state.rows} />
         </div>
@@ -117,7 +124,10 @@ function Table(props) {
     <div className="container">
       <div className="row">
         <div className="col s12 board">
-          <table id="simple-board" className="highlight responsive-table bordered">
+          <table
+            id="simple-board"
+            className="highlight responsive-table bordered"
+          >
             <thead>
               <tr>
                 <th>Name</th>
@@ -134,4 +144,4 @@ function Table(props) {
   );
 }
 
-export default connect(mapStateToProps)(Classes);
+export default connect(mapStateToProps, actions)(Classes);

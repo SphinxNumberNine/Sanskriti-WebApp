@@ -17,7 +17,7 @@ class Dashboard extends Component {
       //let rows = [];
       for (var i = 0; i < this.students.length; i++) {
         var student = this.students[i];
-        let rowID = `row${i}`;
+        let rowID = student._id;
         let cell = [];
         let cellkey = `cell${i}`;
         cell.push(<td key={cellkey + "1"}>{student.name}</td>);

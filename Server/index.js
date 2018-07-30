@@ -28,6 +28,7 @@ require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
 require("./routes/registerRoutes")(app);
 require("./routes/updateRoutes")(app);
+require("./routes/fetchRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
