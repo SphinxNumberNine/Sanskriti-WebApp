@@ -13,7 +13,7 @@ class ClassEdit extends Component {
     var firstLetter = button.charAt(0);
     const labelText = firstLetter.toUpperCase() + button.substring(1);
     return (
-      <p>
+      <p key={button}>
         <input
           className="with-gap"
           name="group1"
@@ -39,7 +39,6 @@ class ClassEdit extends Component {
     ];
     var buttons = [];
     for (var x = 0; x < days.length; x++) {
-      console.log(days[x] + " - " + this.state.dayOfWeek);
       if (days[x].toUpperCase() === this.state.dayOfWeek.toUpperCase()) {
         buttons.push(this.renderDayButton(days[x], true));
       } else {
@@ -51,11 +50,20 @@ class ClassEdit extends Component {
   }
 
   renderForm() {
+    var timeFormatted = "";
     if (this.props.danceClass) {
+      if(this.state.time) {
+        timeFormatted = this.state.time;
+        timeFormatted = timeFormatted.replace(" PM", "");
+        timeFormatted = timeFormatted.replace(" AM", "");
+        if(timeFormatted.length === 4) {
+          timeFormatted = "0" + timeFormatted;
+        }
+      }
       return (
         <div>
           <div className="row">
-            <div className="input-field col s6">
+            <div className="input-field col s4">
               <input
                 value={this.state.name || ""}
                 id="first_name"
@@ -67,7 +75,7 @@ class ClassEdit extends Component {
                 Name:
               </label>
             </div>
-            <div className="input-field col s6">
+            <div className="input-field col s4">
               <input
                 value={this.formatFeeString(this.state.fee) || ""}
                 id="first_name"
@@ -77,6 +85,18 @@ class ClassEdit extends Component {
               />
               <label className="active" htmlFor="first_name">
                 Fee:
+              </label>
+            </div>
+            <div className="input-field col s4">
+              <input
+                id="time_picker"
+                type="time"
+                className="timepicker"
+                value={timeFormatted || ""}
+                onChange={this.handleTimeChange.bind(this)}
+              />
+              <label className="active" htmlFor="time_picker">
+                Time:
               </label>
             </div>
           </div>
@@ -93,13 +113,13 @@ class ClassEdit extends Component {
 
   render() {
     return (
-    <div>
-      <div style={{ textAlign: "center" }}>
-        <h5>Class Edit</h5>
-      </div>  
-      {this.renderForm()}
-    </div>
-    )
+      <div>
+        <div style={{ textAlign: "center" }}>
+          <h5>Class Edit</h5>
+        </div>
+        {this.renderForm()}
+      </div>
+    );
   }
 
   handleNameChange(e) {
@@ -111,9 +131,13 @@ class ClassEdit extends Component {
   }
 
   handleDayOfWeekChange(e) {
-    if(e.target.checked) {
+    if (e.target.checked) {
       this.setState({ dayOfWeek: e.target.id });
     }
+  }
+
+  handleTimeChange(e) {
+    this.setState({ time: e.target.value });
   }
 
   formatFeeString(feeString) {
