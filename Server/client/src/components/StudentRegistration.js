@@ -174,15 +174,23 @@ class StudentRegistration extends Component {
     this.submit = this.submit.bind(this);
     return (
       <form>
-        <h6>Name: </h6>
-        <input type="text" name="name" id="name_id" />
-        <br />
-        <h6>Email: </h6>
-        <input type="text" name="email" id="email_id" />
-        <br />
-        <h6>Phone: </h6>
-        <input type="number" name="phone" id="phone_id" />
-        <br />
+        <div className="row">
+          <div className="col s4">
+            <h6>Name: </h6>
+            <input type="text" name="name" id="name_id" />
+            <br />
+          </div>
+          <div className="col s4">
+            <h6>Email: </h6>
+            <input type="text" name="email" id="email_id" />
+            <br />
+          </div>
+          <div className="col s4">
+            <h6>Phone: </h6>
+            <input type="number" name="phone" id="phone_id" />
+            <br />
+          </div>
+        </div>
         <h6>Classes: </h6>
         <ul>{this.renderClasses()}</ul>
         <div style={{ textAlign: "right" }}>

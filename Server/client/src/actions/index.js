@@ -8,8 +8,8 @@ export const fetchUser = () => async dispatch => {
 };
 
 // handles token from Stripe
-export const handleToken = token => async dispatch => {
-  const res = await axios.post("/api/stripe", token);
+export const handleToken = (token, amount) => async dispatch => {
+  const res = await axios.post("/api/stripe", { token: token, amount: amount });
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 

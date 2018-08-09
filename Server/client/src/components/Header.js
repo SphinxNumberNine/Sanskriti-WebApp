@@ -49,7 +49,7 @@ class Header extends Component {
       href = "/dashboard";
     }
     return (
-      <nav>
+      <nav className="red lighten-2">
         <div className="nav-wrapper">
           <a href={href} className="left brand-logo">
             Sanskriti School of Dance
