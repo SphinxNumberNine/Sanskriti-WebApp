@@ -52,11 +52,11 @@ class ClassEdit extends Component {
   renderForm() {
     var timeFormatted = "";
     if (this.props.danceClass) {
-      if(this.state.time) {
+      if (this.state.time) {
         timeFormatted = this.state.time;
         timeFormatted = timeFormatted.replace(" PM", "");
         timeFormatted = timeFormatted.replace(" AM", "");
-        if(timeFormatted.length === 4) {
+        if (timeFormatted.length === 4) {
           timeFormatted = "0" + timeFormatted;
         }
       }
@@ -104,6 +104,26 @@ class ClassEdit extends Component {
             <div className="col s3">
               <label>Day of Week:</label>
               {this.renderDaysOfWeekButtons()}
+            </div>
+          </div>
+          <div className="row">
+            <div style={{ textAlign: "right" }}>
+              <input
+                className="btn red lighten-3"
+                type="button"
+                id="delete_button"
+                value="Delete Class"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div style={{ textAlign: "right" }}>
+              <input
+                className="btn red lighten-3"
+                type="button"
+                id="submit_button"
+                value="Submit Changes"
+              />
             </div>
           </div>
         </div>
