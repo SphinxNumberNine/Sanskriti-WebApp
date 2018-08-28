@@ -17,7 +17,7 @@ class Classes extends Component {
   }
 
   onRowClick(id) {
-    console.log(id);
+    console.log(id + "1");
   }
 
   async getClasses() {
