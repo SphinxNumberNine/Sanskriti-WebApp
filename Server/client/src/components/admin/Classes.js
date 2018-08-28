@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from '../../actions'
 import axios from "axios";
 
 class Classes extends Component {
@@ -17,7 +18,8 @@ class Classes extends Component {
   }
 
   onRowClick(id) {
-    console.log(id + "1");
+    this.props.fetchClass(id);
+    this.props.history.push("/admin/class-edit");
   }
 
   async getClasses() {
@@ -142,4 +144,4 @@ function Table(props) {
   );
 }
 
-export default connect(mapStateToProps)(Classes);
+export default connect(mapStateToProps, actions)(Classes);

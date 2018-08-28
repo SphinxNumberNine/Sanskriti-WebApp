@@ -12,7 +12,7 @@ class StudentRegistration extends Component {
     this.selectedCheckboxes = new Set();
   }
 
-  handleInputChange() { }
+  handleInputChange() {}
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -60,11 +60,11 @@ class StudentRegistration extends Component {
 
     //TODO: Check if fields are valid
 
-    if((!this.validateEmail(email))) {
+    if (!this.validateEmail(email)) {
       return;
     }
-    
-    if((!this.validateName(name))) {
+
+    if (!this.validateName(name)) {
       return;
     }
 
@@ -133,7 +133,7 @@ class StudentRegistration extends Component {
           auth: this.state.auth,
           parentUser: this.state.parentUser,
           classes: classes
-        })
+        });
         console.log(this.state.classes);
       }
     });
@@ -174,15 +174,23 @@ class StudentRegistration extends Component {
     this.submit = this.submit.bind(this);
     return (
       <form>
-        <h6>Name: </h6>
-        <input type="text" name="name" id="name_id" />
-        <br />
-        <h6>Email: </h6>
-        <input type="text" name="email" id="email_id" />
-        <br />
-        <h6>Phone: </h6>
-        <input type="number" name="phone" id="phone_id" />
-        <br />
+        <div className="row">
+          <div className="col s4">
+            <h6>Name: </h6>
+            <input type="text" name="name" id="name_id" />
+            <br />
+          </div>
+          <div className="col s4">
+            <h6>Email: </h6>
+            <input type="text" name="email" id="email_id" />
+            <br />
+          </div>
+          <div className="col s4">
+            <h6>Phone: </h6>
+            <input type="number" name="phone" id="phone_id" />
+            <br />
+          </div>
+        </div>
         <h6>Classes: </h6>
         <ul>{this.renderClasses()}</ul>
         <div style={{ textAlign: "right" }}>
@@ -213,7 +221,7 @@ class StudentRegistration extends Component {
   }
 
   validateName(name) {
-    if(name.length > 70 || name.length < 7) {
+    if (name.length > 70 || name.length < 7) {
       return false;
     }
 

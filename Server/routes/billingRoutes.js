@@ -3,12 +3,12 @@ const stripe = require("stripe")(keys.stripeSecretKey);
 const nodemailer = require('nodemailer');
 
 module.exports = app => {
-  app.post("/api/stripe", async (req, res) => {
+  app.post("/api/stripe", async (req, res) => { 
     const charge = await stripe.charges.create({
-      amount: 8000,
+      amount: req.body.amount,
       currency: "usd",
       description: "Fees for the month",
-      source: req.body.id
+      source: req.body.token.id
     });
 
     console.log(charge.source.name);
