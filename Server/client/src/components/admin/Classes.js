@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from '../../actions'
+import * as actions from "../../actions";
 import axios from "axios";
 
 class Classes extends Component {
@@ -65,7 +65,6 @@ class Classes extends Component {
 
     return null;
   }
-
   renderClasses() {
     if (!this.state.promiseResolved) {
       return (
@@ -144,4 +143,7 @@ function Table(props) {
   );
 }
 
-export default connect(mapStateToProps, actions)(Classes);
+export default connect(
+  mapStateToProps,
+  actions
+)(Classes);
